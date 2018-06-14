@@ -24,3 +24,24 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
+$factory->define(App\Post::class, function (Faker $faker) {
+    return [
+        'title' => $faker->sentence(3,5),
+        'description' => $faker->paragraphs(rand(2,3), true),
+        'category_id' => $faker->numberBetween(1,2),
+        'user_id' => $faker->numberBetween(1,10),
+    ];
+});
+
+$factory->define(App\Role::class, function (Faker $faker) {
+    return [
+        'name' => 'administrator',
+    ];
+});
+
+$factory->define(App\Category::class, function (Faker $faker) {
+    return [
+        'name' => 'Lifestyle',
+    ];
+});
+

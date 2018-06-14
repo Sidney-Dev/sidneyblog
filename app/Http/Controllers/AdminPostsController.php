@@ -17,10 +17,19 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('user', 'category')->get();
-        return response()->json([
-            'posts' => $posts, 
-        ], 200);
+        $posts = Post::with('user', 'category')->paginate(10);
+        $response = [
+            'pagination' => [
+                'total' => $posts->total(),
+                'per_page' => $posts->perPage(),
+                'current_page' => $posts->currentPage(),
+                'last_page' => $posts->lastPage(),
+                'from' => $posts->firstItem(),
+                'to' => $posts->lastItem()
+            ],
+            'data' => $posts
+        ];
+        return response()->json($response);
     }
 
     /**
@@ -41,12 +50,22 @@ class AdminPostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $exploded = explode(',', request('photo'));
+        $decoded = base64_decode($exploded[1]);
+        if(str_contains($exploded[0], 'jpeg'))
+            $extension = 'jpg';
+        else
+            $extension = 'png';   
+
+        $fileName = str_random().'.'.$extension;
+        $path = public_path().'/'.$fileName;
+        file_put_contents($path, $decoded);
         $post = Post::create([
             'title' => request('title'),
             'description' => request('description'),
             'user_id' => Auth::id(),
-            'category_id' => request('category_id')
+            'category_id' => request('category_id'),
+            'photo' => $fileName
         ]);
 
         return response()->json([

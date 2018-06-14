@@ -1,5 +1,5 @@
 <template>
-        <div class="row">
+        <div class="row home-template">
             <div id="adminsidebar" class="col-sm-2 bg-primary">
                 <div class="wrapper">
                     <nav id="sidebar">
@@ -11,7 +11,7 @@
                         <ul class="list-unstyled components">
                             <li><router-link to="/admin/users"><a class="navbar-brand">Users</a></router-link></li>
                             <li><router-link to="/admin/posts"><a class="navbar-brand">Posts</a></router-link></li>
-                            <li><!-- Link with dropdown items -->
+                            <!--<li> Link with dropdown items 
                                 <a href="#homeLecturer" data-toggle="collapse" aria-expanded="false">Posts</a>
                                 <ul class="collapse list-unstyled" id="homeLecturer">
                                     <li><a href="#">Add New</a></li>
@@ -28,13 +28,12 @@
                                 </ul>
                             </li>
                             <li><a href="#">Streams</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Contact</a></li>-->
                         </ul>
                     </nav>
                 </div>
             </div>
-
-            <div class="col-sm-10 jumbotron">
+            <div class="col-sm-10">
                 <router-view></router-view>
             </div>
         </div>

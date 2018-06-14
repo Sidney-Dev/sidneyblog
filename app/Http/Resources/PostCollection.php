@@ -17,6 +17,7 @@ class PostCollection extends ResourceCollection
         return [
             'id' => $this->id,
             'name' => $this->title,
+            'photo' => $this->photo,
             'description' => $this->description,
             'user_id' => $this->user_id,
             'created_at' => $this->created_at,

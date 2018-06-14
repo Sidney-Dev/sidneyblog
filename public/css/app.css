@@ -10411,9 +10411,123 @@ a.text-dark:focus {
   }
 }
 
+html,
+body,
+#app {
+  height: 100%;
+}
+
+img.img-responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+.row {
+  margin: 0 !important;
+}
+
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+div#adminsidebar {
+  padding: 0;
+}
+
+div#adminsidebar li a {
+  text-decoration: none !important;
+}
+
+a.navbar-brand {
+  display: block;
+  padding: 10px;
+  margin: 0;
+}
+
+div#adminsidebar a.navbar-brand:hover {
+  background: black;
+  text-decoration: none !important;
+}
+
+/*****************************
+          PAGINATION
+ *****************************/
+
+nav#page_nav {
+  margin: 0;
+  margin-bottom: 1.5rem;
+}
+
+nav#page_nav li {
+  list-style: none;
+}
+
+nav#page_nav li {
+  background: #17a2b8;
+  margin-right: 2px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+
+nav#page_nav li {
+  width: 30px;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+ul.pagination-list {
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+nav#page_nav li a {
+  width: 30px;
+  height: 30px;
+  display: block;
+  margin: 0;
+  text-align: center;
+  padding-top: 2px;
+}
+
+a.pagination-link.is-current {
+  background: black;
+}
+
+header#main-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div#content {
+  width: 69%;
+  height: 100%;
+}
+
+.sidebar {
+  width: 30%;
+  background: blue;
 }
 

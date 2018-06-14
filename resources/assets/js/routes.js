@@ -1,12 +1,13 @@
 import VueRouter from 'vue-router';
-import Home from './components/Home.vue';
+import Admin from './components/Admin.vue';
+import Homepage from './components/Homepage.vue';
 import AdminUsers from './components/AdminUsers.vue';
 import AdminPosts from './components/AdminPosts.vue';
 
 let routes = [
 	{
-		path: '/admin',
-		component: Home
+		path: '/',
+		component: Homepage
 	},
 	{
 		path: '/admin/users',

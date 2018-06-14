@@ -12,21 +12,27 @@ use App\Http\Resources\UserCollection;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('home');
+    return view('homepage');
 });
+
+
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/example', function(){
-	return view('welcome');
-});
+Route::get('/api/homeposts', 'HomePostsController@posts')->name('homeposts');
 
 Route::resource('/api/users', 'AdminUsersController');
 Route::resource('/api/posts', 'AdminPostsController');
 Route::resource('/api/categories', 'AdminCategories');
 
 
+Route::group(['middleware'=>'admin'], function(){
+
+	Route::get('/admin/{vue_capture?}', function () {
+	    return view('admin');
+	})->where('vue_capture','[\/\w\.-]*');
+
+});

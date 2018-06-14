@@ -17,7 +17,8 @@ class Post extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->title,
-            'body' => $this->body,
+            'photo' => $this->photo,
+            'description' => $this->description,
             'user' => User::collection($this->user),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

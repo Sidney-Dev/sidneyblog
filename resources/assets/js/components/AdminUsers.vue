@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">          
+            <div class="col-md-10">          
                 <h1>All Users</h1>
                 <button type="button" class="mb-4 btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add User</button>
                 <table class="table">
