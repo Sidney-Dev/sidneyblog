@@ -19,6 +19,8 @@ Vue.component('admin', require('./components/Admin.vue'));
 Vue.component('sidebar', require('./components/Sidebar.vue'));
 Vue.component('homepage', require('./components/Homepage.vue'));
 
+Vue.component('subscriber', require('./components/subscriber/Main.vue'));
+
 Vue.component('pagination', require('./components/Pagination.vue'));
 
 Vue.filter('snippet', function(value){
@@ -29,3 +31,9 @@ const app = new Vue({
     el: '#app',
     router
 });
+
+const subscriber = new Vue({
+    el: '#subscriber',
+    router
+});
+

@@ -10422,6 +10422,22 @@ img.img-responsive {
   height: auto;
 }
 
+.max-width {
+  max-width: 1300px;
+  width: 100%;
+  margin: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+header a.nav-link {
+  padding-left: 0 !important;
+}
+
+nav.navbar.navbar-expand-sm {
+  padding-left: 0;
+}
+
 .row {
   margin: 0 !important;
 }
@@ -10529,5 +10545,9 @@ div#content {
 .sidebar {
   width: 30%;
   background: blue;
+}
+
+div#main-content {
+  margin-top: 40px;
 }
 

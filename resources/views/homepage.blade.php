@@ -22,9 +22,31 @@
 </head>
 <body>
     <div id="app">
-        <div class="homepage">
-        	<Homepage></Homepage>
-        </div>
+        <header id="top-header">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="collapse navbar-collapse max-width" id="navbarNav">
+                <ul class="navbar-nav">
+                    @if(Auth::check())
+                        <li class="nav-item">
+                            <li><router-link to="/subscriber"><a class="nav-link" >{{ Auth::user()->name }}</a></router-link></li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/logout') }}">Logout</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/register') }}">Register</a>
+                        </li>
+                    @endif
+                </ul>
+              </div>
+            </nav>
+        </header>
+  
+        <router-view></router-view>
     </div>
 </body>
 </html>

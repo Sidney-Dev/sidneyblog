@@ -3,6 +3,7 @@ import Admin from './components/Admin.vue';
 import Homepage from './components/Homepage.vue';
 import AdminUsers from './components/AdminUsers.vue';
 import AdminPosts from './components/AdminPosts.vue';
+import Subscriber from './components/subscriber/Main.vue';
 
 let routes = [
 	{
@@ -16,7 +17,11 @@ let routes = [
 	{
 		path: '/admin/posts',
 		component: AdminPosts
-	}
+	},
+	{
+		path: '/subscriber',
+		component: Subscriber
+	},
 ];
 
 export default new VueRouter({

@@ -9,16 +9,16 @@
                         </div>
                         <!-- Sidebar Links -->
                         <ul class="list-unstyled components">
-                            <li><router-link to="/admin/users"><a class="navbar-brand">Users</a></router-link></li>
-                            <li><router-link to="/admin/posts"><a class="navbar-brand">Posts</a></router-link></li>
-                            <!--<li> Link with dropdown items 
-                                <a href="#homeLecturer" data-toggle="collapse" aria-expanded="false">Posts</a>
+                            <li><router-link to="/admin/users"><a>Users</a></router-link></li>
+                            <li><router-link to="/admin/posts"><a>Posts</a></router-link></li>
+                            <li> 
+                                <a href="#homeLecturer" data-toggle="collapse" aria-expanded="false">Widgets</a>
                                 <ul class="collapse list-unstyled" id="homeLecturer">
                                     <li><a href="#">Add New</a></li>
                                     <li><a href="#">Viwe All</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Courses</a></li>
+                            <!--<li><a href="#">Courses</a></li>
                             <li> 
                                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Courses</a>
                                 <ul class="collapse list-unstyled" id="homeSubmenu">
