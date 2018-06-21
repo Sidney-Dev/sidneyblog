@@ -16,6 +16,7 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
 //Route::get('/login', 'Auth\LoginController@showLoginForm');
@@ -37,9 +38,14 @@ Route::group(['middleware'=>'admin'], function(){
 	})->where('vue_capture','[\/\w\.-]*');
 });
 
+Route::get('/post/{id}/{vue_capture?}', function () {
+    return view('homepage');
+})->where('vue_capture','[\/\w\.-]*');
 
 Route::get('/subscriber/{vue_capture?}', function () {
     return view('homepage');
 })->where('vue_capture','[\/\w\.-]*');
 
 Route::resource('/api/subscriber', 'SubscriberController');
+
+Route::get('/single/post/{id}', 'AdminPostsController@single');

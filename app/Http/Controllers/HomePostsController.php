@@ -9,7 +9,18 @@ use App\Http\Resources\PostCollection;
 class HomePostsController extends Controller
 {
     public function posts(){
-    	$posts = Post::with('user', 'category')->limit(6)->orderBy('id', 'desc')->get();
-    	return response()->json(['posts' => $posts], 200);
+        $posts = Post::with('user', 'category')->orderBy('id', 'desc')->paginate(5);
+        $response = [
+            'pagination' => [
+                'total' => $posts->total(),
+                'per_page' => $posts->perPage(),
+                'current_page' => $posts->currentPage(),
+                'last_page' => $posts->lastPage(),
+                'from' => $posts->firstItem(),
+                'to' => $posts->lastItem()
+            ],
+            'data' => $posts
+        ];
+        return response()->json($response);
     }
 }

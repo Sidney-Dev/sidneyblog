@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -93,5 +94,12 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         Post::findOrFail($id)->delete();
+    }
+
+    public function single($id){
+        $post = Post::with('category', 'user')->findOrFail($id);
+        return  response()->json([
+            'post' => $post
+        ], 200);
     }
 }

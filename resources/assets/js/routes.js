@@ -4,6 +4,7 @@ import Homepage from './components/Homepage.vue';
 import AdminUsers from './components/AdminUsers.vue';
 import AdminPosts from './components/AdminPosts.vue';
 import Subscriber from './components/subscriber/Main.vue';
+import Single from './components/Single.vue';
 
 let routes = [
 	{
@@ -22,6 +23,10 @@ let routes = [
 		path: '/subscriber',
 		component: Subscriber
 	},
+	{
+		path: '/post/:id',
+		component: Single
+	}
 ];
 
 export default new VueRouter({

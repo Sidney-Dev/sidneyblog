@@ -39,7 +39,7 @@
     			      <tr v-for="(post, id) in posts">
     			        <td>{{post.title}}</td>
     			        <td><img height="50" :src="'http://sidneyblog.local/' + post.photo" :alt=post.title></td>
-    			        <td>{{post.description | snippet}}</td>
+    			        <td v-html="post.description"></td>
     			        <td>{{post.category.name}}</td>
                         <td><button @click.prevent="iniUpdate(id)" class="btn btn-info" data-toggle="modal" data-target="#editModal">Edit</button></td>
     			        <td><button @click="deletePost(id)" class="btn btn-danger">DELETE</button></td>
@@ -67,7 +67,7 @@
 
                         <div class="form-group">
                           <label>Content</label>
-                          <textarea v-model="post.description" class="form-control"></textarea>
+                          <editor v-model="post.description" :init="{plugins: 'wordcount'}"></editor>
                         </div>
 
                         <div class="form-group">
@@ -114,7 +114,7 @@
 			        </div>
 
 			        <div class="form-group">
-			         <textarea v-model="update_post.description" class="form-control"></textarea>
+			         <editor :apiKey="kq3z5u2meje79kyrxxx1ttqglqlsdj5ybf40tsjqx9s8hlq6" v-model="update_post.description" :init="{plugins: 'wordcount'}"></editor>
 			        </div>
 
 			      </div>
@@ -131,7 +131,12 @@
 </template>
 
 <script>
+
+	import Editor from '@tinymce/tinymce-vue';
     export default {
+    	components: {
+    		'editor' : Editor
+    	},
     	data(){
     		return{
     			posts: [],

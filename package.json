@@ -22,10 +22,13 @@
     "dependencies": {
         "@tinymce/tinymce-vue": "^1.0.8",
         "laravel-vue-pagination": "^1.2.0",
+        "moment": "^2.22.2",
         "vue-easy-tinymce": "^1.0.2",
+        "vue-moment": "^4.0.0",
         "vue-resource": "^1.5.1",
         "vue-route": "^1.5.1",
         "vue-route-laravel": "^1.0.4",
-        "vue-router": "^3.0.1"
+        "vue-router": "^3.0.1",
+        "vue-tinymce-editor": "^1.6.2"
     }
 }
