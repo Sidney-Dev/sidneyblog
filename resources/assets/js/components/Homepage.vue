@@ -6,9 +6,7 @@
 					<div id="content">
 						<posts></posts>
 					</div>
-					<div class="sidebar bg-light">
-						<sidebar></sidebar>
-					</div>
+					<sidebar></sidebar>
 				</div>
 			</div>
 			<footerrr></footerrr>

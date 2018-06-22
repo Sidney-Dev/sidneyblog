@@ -3,9 +3,9 @@
     	<input type="text" v-model="search" class="form-control" id="search">
 	    <article id="posts" v-for="post in filteredPosts">
 	    	<p>Posted By <strong>{{post.user.name}}</strong> {{ post.created_at | moment("from", "now", true) }} ago</p>
-	    	<h2><router-link :to="'/post/' + post.id">{{post.title}}</router-link></h2>
-	    	<div class="description" v-html="post.description"></div>
-	    	<router-link class="btn bg-light read-more" :to="'/post/' + post.id">Read More</router-link>
+	    	<h2><router-link :to="{name:'post', params: {slug: post.slug}}">{{post.title}}</router-link></h2>
+	    	<div v-html="post.description"></div>
+	    	<router-link class="btn bg-light read-more" :to="{name:'post', params: {slug: post.slug}}">Read More</router-link>
 	    </article>
 	    <pagination v-if="pagination.last_page > 1" :pagination="pagination" :offset="5" @paginate="allPosts()"></pagination>
     </div>
@@ -23,9 +23,13 @@
        		}
        	},
        	mounted(){
-       		this.allPosts()
+       		this.allPosts();
+       		this.mni();
        	},
        	methods: {
+       		mni(){
+				$('#result').text(txt.substring(0,30) + '.....');
+       		},
 			allPosts(){
 				axios.get('/api/homeposts?page=' + this.pagination.current_page)
 				.then(response => {
@@ -42,10 +46,15 @@
                 return this.posts.filter((post) => {
                     return post.title.match(this.search);
                 });
-            }
+            },
+            descriptionSnippet() {
+		        var div = document.createElement("div");
+		        div.innerHTML = post.description;
+		        return div.textContent.slice(0,100);
+		    }
         }
     }
-    
+
 </script>
 
 <style lang="scss">
@@ -55,5 +64,8 @@
 			width: 30%;
 		}
         flex-wrap: wrap;
+	}
+	input#search {
+	    margin-bottom: 10px;
 	}
 </style>

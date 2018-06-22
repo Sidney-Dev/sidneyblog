@@ -48,4 +48,13 @@ Route::get('/subscriber/{vue_capture?}', function () {
 
 Route::resource('/api/subscriber', 'SubscriberController');
 
-Route::get('/single/post/{id}', 'AdminPostsController@single');
+Route::get('/single/post/{slug}', 'AdminPostsController@single');
+
+/*
+Route::get('/single/post/{slug}',function(){
+ $post = App\Post::with('category', 'user')->where('slug', 'example')->first();
+ return  response()->json([
+        'post' => $post
+    ], 200);
+});
+*/

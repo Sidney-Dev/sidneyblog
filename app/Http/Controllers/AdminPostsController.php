@@ -96,10 +96,11 @@ class AdminPostsController extends Controller
         Post::findOrFail($id)->delete();
     }
 
-    public function single($id){
-        $post = Post::with('category', 'user')->findOrFail($id);
+    public function single($slug){
+        $post = Post::with('category', 'user')->where('slug', $slug)->first();
         return  response()->json([
             'post' => $post
         ], 200);
     }
+
 }

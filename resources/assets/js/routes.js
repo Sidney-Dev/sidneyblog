@@ -24,7 +24,8 @@ let routes = [
 		component: Subscriber
 	},
 	{
-		path: '/post/:id',
+		path: '/post/:slug',
+		name: 'post',    
 		component: Single
 	}
 ];

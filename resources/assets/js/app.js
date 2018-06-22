@@ -11,10 +11,12 @@ import VueRouter from 'vue-router';
 import router from './routes';
 import Editor from '@tinymce/tinymce-vue';
 import VueMoment from 'vue-moment';
+import VueDisqus from 'vue-disqus';
+
 window.Vue = require('vue');
 
 Vue.use(VueRouter);
-
+Vue.use(VueDisqus);
 Vue.use(require('vue-moment'));
 
 Vue.component('home', require('./components/Home.vue'));

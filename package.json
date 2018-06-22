@@ -23,6 +23,7 @@
         "@tinymce/tinymce-vue": "^1.0.8",
         "laravel-vue-pagination": "^1.2.0",
         "moment": "^2.22.2",
+        "vue-disqus": "^3.0.3",
         "vue-easy-tinymce": "^1.0.2",
         "vue-moment": "^4.0.0",
         "vue-resource": "^1.5.1",

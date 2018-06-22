@@ -30,6 +30,7 @@ $factory->define(App\Post::class, function (Faker $faker) {
         'description' => $faker->paragraphs(rand(2,3), true),
         'category_id' => $faker->numberBetween(1,2),
         'user_id' => $faker->numberBetween(1,10),
+        'slug'=> $faker->slug()
     ];
 });
 
