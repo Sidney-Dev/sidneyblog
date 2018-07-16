@@ -1,5 +1,29 @@
 <template>
-    <div class="container">
+    <div class="row home-template">
+      <div id="adminsidebar" class="col-sm-2">
+          <div class="wrapper">
+              <nav id="sidebar">
+                  <!-- Sidebar Header -->
+                  <div class="sidebar-header text-center">
+                      <h3>DASHBOARD</h3>
+                  </div>
+                  <!-- Sidebar Links -->
+                  <ul class="list-unstyled components text-center">
+                      <li><router-link to="/admin/users"><a>Users</a></router-link></li>
+                      <li><a href="http://sidneyblog.local/admin/posts">Posts</a></li>
+                      <!--<li> 
+                          <a href="#homeLecturer" data-toggle="collapse" aria-expanded="false">Widgets</a>
+                          <ul class="collapse list-unstyled" id="homeLecturer">
+                              <li><a href="#">Add New</a></li>
+                              <li><a href="#">Viwe All</a></li>
+                          </ul>
+                      </li>-->
+                  </ul>
+              </nav>
+          </div>
+      </div>
+      <div class="col-sm-10">
+              <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">          
                 <h1>All Users</h1>
@@ -19,7 +43,7 @@
                         <td>{{ user.name }}</td>
                         <td>{{ user.is_active == 1 ? 'Active' : 'Not Active' }}</td>
                         <td>{{ user.role_id == 1 ? 'Administrator' : 'Guest' }}</td>
-                        <td><button @click.prevent="initUpdate(id)" class="btn btn-primary">Edit</button></td>
+                        <td><button @click.prevent="initUpdate(id)" class="btn btn-info">Edit</button></td>
                         <td><button @click="deleteUser(id)" class="btn btn-danger">Delete</button></td>
                       </tr>
                     </tbody>
@@ -131,6 +155,9 @@
           </div>
         </div>
     </div>
+      </div>
+    </div>
+
 </template>
 
 <script>

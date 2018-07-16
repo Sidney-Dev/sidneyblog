@@ -10472,7 +10472,7 @@ a.navbar-brand {
 }
 
 div#adminsidebar a.navbar-brand:hover {
-  background: black;
+  background: #1f2226;
   text-decoration: none !important;
 }
 
@@ -10483,20 +10483,6 @@ div#adminsidebar a.navbar-brand:hover {
 nav#page_nav {
   margin: 0;
   margin-bottom: 1.5rem;
-}
-
-nav#page_nav li {
-  list-style: none;
-}
-
-nav#page_nav li {
-  background: #17a2b8;
-  margin-right: 2px;
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  color: white;
-  cursor: pointer;
 }
 
 nav#page_nav li {
@@ -10511,6 +10497,12 @@ nav#page_nav li {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background: #1f2226;
+  margin-right: 2px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  list-style: none;
 }
 
 ul.pagination-list {
@@ -10566,7 +10558,7 @@ article#posts {
 }
 
 article#posts p {
-  margin-bottom: 0;
+  margin-bottom: 8px;
 }
 
 article#posts a.read-more {
@@ -10585,5 +10577,84 @@ hr {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+/*****************************************
+            FOOTER SECTION
+*****************************************/
+
+footer.site-footer.bg-darkest {
+  background: black;
+  padding: 50px 0;
+  text-align: center;
+  color: #555d65;
+}
+
+#footer-container .jumbotron {
+  margin-bottom: 0;
+}
+
+div#subscriber-view,
+div#subscriber-view .row {
+  height: 100%;
+}
+
+div#adminsidebar,
+.profile-sidebar {
+  background: #1f2226;
+}
+
+#top-header nav {
+  background: #232528;
+}
+
+.profile-sidebar a,
+#top-header nav a {
+  color: white;
+}
+
+button.btn-info {
+  background: #3a4f52;
+  border-color: #3a4f52;
+}
+
+footer button,
+a.read-more {
+  background: #3a4f52 !important;
+  color: white;
+}
+
+.sidebar i {
+  font-style: normal;
+  font-size: 30px;
+}
+
+.sidebar i:before {
+  font-family: fontawesome;
+}
+
+i.fab.fa-instagram:before {
+  content: '\F16D';
+}
+
+i.fab.fa-facebook-f:before {
+  content: '\F16D';
+}
+
+i.fab.fa-linkedin-in:before {
+  content: '\F0E1';
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.sidebar ul.unstyled.icons-list li {
+  margin-right: 10px;
 }
 

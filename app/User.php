@@ -41,4 +41,12 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function isSubscriber(){
+        if($this->role->name == "subscriber" && $this->is_active == 1){
+            return true;
+        }
+        return false;
+    }
+
 }

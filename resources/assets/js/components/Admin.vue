@@ -1,16 +1,16 @@
 <template>
         <div class="row home-template">
-            <div id="adminsidebar" class="col-sm-2 bg-primary">
+            <div id="adminsidebar" class="col-sm-2">
                 <div class="wrapper">
                     <nav id="sidebar">
                         <!-- Sidebar Header -->
-                        <div class="sidebar-header">
+                        <div class="sidebar-header text-center">
                             <h3>DASHBOARD</h3>
                         </div>
                         <!-- Sidebar Links -->
-                        <ul class="list-unstyled components">
+                        <ul class="list-unstyled components text-center">
                             <li><router-link to="/admin/users"><a>Users</a></router-link></li>
-                            <li><router-link to="/admin/posts"><a>Posts</a></router-link></li>
+                            <li><a href="http://sidneyblog.local/admin/posts">Posts</a></li>
                             <li> 
                                 <a href="#homeLecturer" data-toggle="collapse" aria-expanded="false">Widgets</a>
                                 <ul class="collapse list-unstyled" id="homeLecturer">
@@ -18,17 +18,6 @@
                                     <li><a href="#">Viwe All</a></li>
                                 </ul>
                             </li>
-                            <!--<li><a href="#">Courses</a></li>
-                            <li> 
-                                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Courses</a>
-                                <ul class="collapse list-unstyled" id="homeSubmenu">
-                                    <li><a href="#">Electrical</a></li>
-                                    <li><a href="#">Page</a></li>
-                                    <li><a href="#">Page</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Streams</a></li>
-                            <li><a href="#">Contact</a></li>-->
                         </ul>
                     </nav>
                 </div>
@@ -42,7 +31,7 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            console.log('Admin component mounted.')
         }
     }
 </script>

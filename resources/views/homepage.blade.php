@@ -24,13 +24,14 @@
 <body>
     <div id="app">
         <header id="top-header">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light">
               <div class="collapse navbar-collapse max-width" id="navbarNav">
                 <ul class="navbar-nav">
                     @if(Auth::check())
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <li><router-link to="/subscriber"><a class="nav-link" >{{ Auth::user()->name }}</a></router-link></li>
-                        </li>
+                        </li>-->
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/logout') }}">Logout</a>
                         </li>

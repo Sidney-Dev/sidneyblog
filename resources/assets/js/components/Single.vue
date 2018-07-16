@@ -6,6 +6,7 @@
 			    <h1>{{ post.title }}</h1>
 			    <p>Posted By <strong>{{post.user.name}}</strong> {{ post.created_at | moment("from", "now", true) }} ago</p>
 			    <article v-html="post.description"></article>
+          <vue-disqus shortname="sidneyblog-local-1" :identifier="post.id"></vue-disqus>
     		</div>
 		    <sidebar></sidebar>    			
     	</div> 	

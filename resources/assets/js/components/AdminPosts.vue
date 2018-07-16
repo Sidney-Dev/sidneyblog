@@ -22,7 +22,7 @@
                         <tr v-for="(post, id) in posts">
                            <td>{{ post.title }}</td>
                            <td><img height="50" :src="'http://sidneyblog.local/' + post.photo" :alt=post.title></td>
-                           <td>{{ post.description | snippet }}</td>
+                           <td>{{synopsis (post.description)}}...</td>
                            <td>{{ post.category.name }}</td>
                            <td>{{ post.user.name }}</td>
                            <td><button @click.prevent="iniUpdate(id)" class="btn btn-info" data-toggle="modal" data-target="#editModal">Edit</button></td>
@@ -46,12 +46,11 @@
                         </div>
                         <div class="form-group">
                             <label>Image</label>
-                            <input type="file" @change="imageChanged" class="form-control">
+                            <input name="photo" type="file" @change="imageChanged" class="form-control">
                         </div>
                         <div class="form-group">
                           <label>Content</label>
-                          <textarea v-model="post.description" class="form-control"></textarea>
-                          <!--<editor api-key="kq3z5u2meje79kyrxxx1ttqglqlsdj5ybf40tsjqx9s8hlq6" v-model="post.description"></editor>-->
+                          <editor v-model="post.description" :init="{plugins: 'wordcount'}"></editor>
                         </div>
 
                         <div class="form-group">
@@ -64,7 +63,7 @@
 
                       </div>
                       <div class="modal-footer">
-                        <button type="button" @click.prevent="addPost" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                        <button type="button" @click.prevent="addPost" class="btn btn-info" data-dismiss="modal">Submit</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                       </div>
                     </div>      
@@ -90,7 +89,7 @@
 
                         <div class="form-group">
                             <label>Image</label>
-                            <input type="file" @change="imageUpdated" class="form-control">
+                            <input name="photo" type="file" @change="imageUpdated" class="form-control">
                         </div>
 
                         <div class="form-group">
@@ -101,12 +100,12 @@
                         </div>
 
                         <div class="form-group">
-                         <textarea v-model="update_post.description" class="form-control"></textarea>
+                         <editor v-model="update_post.description" :init="{plugins: 'wordcount'}"></editor>
                         </div>
 
                       </div>
                       <div class="modal-footer">
-                        <button type="button" @click.prevent="editPost" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                        <button type="button" @click.prevent="editPost" class="btn btn-info" data-dismiss="modal">Submit</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                       </div>
                     </div>      
@@ -127,18 +126,18 @@
     },
     data(){
       return{
-          posts: [],
-          pagination: {
-            'current_page': 1
-          },
-          post: {
-              title: '',
-              description: '',
-              category_id: '',
-              photo: ''
-          },
-          update_post: {},
-          categories: []
+        posts: [],
+        pagination: {
+          'current_page': 1
+        },
+        post: {
+          title: '',
+          description: '',
+          category_id: '',
+          photo: ''
+        },
+        update_post: {},
+        categories: []
       }
     },
     mounted() {
@@ -147,71 +146,103 @@
     },
     
     methods: {
+      synopsis (inputString) {
+        var div = document.createElement('div')
+        div.innerHTML = inputString
+        return div.textContent.slice(0, 150)
+      },
       imageChanged(e){
-          var fileReader = new FileReader()
-          fileReader.readAsDataURL(e.target.files[0])
-          fileReader.onload = (e) => {
-              this.post.photo = e.target.result
-          }
+        var fileReader = new FileReader()
+        fileReader.readAsDataURL(e.target.files[0])
+        fileReader.onload = (e) => {
+            this.post.photo = e.target.result
+        }
       },
       imageUpdated(e){
-          var fileReader = new FileReader()
-          fileReader.readAsDataURL(e.target.files[0])
-          fileReader.onload = (e) => {
-              this.update_post.photo = e.target.result
-          }
+        var fileReader = new FileReader()
+        fileReader.readAsDataURL(e.target.files[0])
+        fileReader.onload = (e) => {
+            this.update_post.photo = e.target.result
+        }
       },
       showCategories(){
-          axios.get('/api/categories').then(response => {
-              this.categories = response.data.categories;
-          });
+        axios.get('/api/categories').then(response => {
+            this.categories = response.data.categories;
+        });
       },
+      /************************
+            SHOW METHOD
+      ************************/
       showPosts(){
-          axios.get('/api/posts?page=' + this.pagination.current_page)
-          .then(response => {
-              this.posts = response.data.data.data;
-              this.pagination = response.data.pagination;
-          });              
+        axios.get('/api/posts?page=' + this.pagination.current_page)
+        .then(response => {
+            this.posts = response.data.data.data;
+            this.pagination = response.data.pagination;
+        });              
       },
+      /************************
+            ADD METHOD
+      ************************/      
       addPost(){
-          axios.post('/api/posts', {
-              title: this.post.title,
-              description: this.post.description,
-              category_id: this.post.category_id,
-              photo: this.post.photo               
-          }).then(response => {
-              this.showPosts();
-          })
-          .catch(function(error){
-              console.log(error);
-          });
+        axios.post('/api/posts', {
+            title: this.post.title,
+            description: this.post.description,
+            category_id: this.post.category_id,
+            photo: this.post.photo               
+        }).then(response => {
+            this.showPosts();
+        })
+        .catch(function(error){
+            console.log(error);
+        });
       },
       deletePost(id){
-          axios.delete('/api/posts/' + this.posts[id].id)
-          .then(response => {
-              this.showPosts();
-          })
-          .catch(function(error){
-              console.log(error);
-          });
-      },
-      iniUpdate(id){
-          $('#editModal').modal("show");
-          this.update_post = this.posts[id];
-      },
-      editPost(){
-        axios.put('/api/posts/' + this.update_post.id, {
-            title: this.update_post.title,
-            description: this.update_post.description,
-            category_id: this.update_post.category_id,
-            photo: this.update_post.photo
-        })
+        axios.delete('/api/posts/' + this.posts[id].id)
         .then(response => {
             this.showPosts();
         })
         .catch(function(error){
-          console.log(error);
+            console.log(error);
         });
+      },
+      /************************
+            UPDATE METHOD
+      ************************/
+      iniUpdate(id){
+        $('#editModal').modal("show");
+        this.update_post = this.posts[id];
+        this.update_post.photo = '';
+      },
+      editPost(){
+        if(this.post.photo == ''){
+          axios.put('/api/posts/' + this.update_post.id, {
+            title: this.update_post.title,
+            description: this.update_post.description,
+            category_id: this.update_post.category_id,
+          })
+          .then(response => {
+            this.showPosts();
+            console.log('updated');
+          })
+          .catch(function(error){
+            console.log(error);
+          });
+        } 
+        else {
+          axios.put('/api/posts/' + this.update_post.id, {
+            title: this.update_post.title,
+            description: this.update_post.description,
+            category_id: this.update_post.category_id,
+            photo: this.update_post.photo
+          })
+          .then(response => {
+            this.showPosts();
+            console.log('updated');
+          })
+          .catch(function(error){
+            console.log(error);
+          });
+        }
       }
     }
   }

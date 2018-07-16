@@ -5,97 +5,104 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Category;
 use App\Http\Resources\Post as PostResource;
 use App\Http\Resources\PostCollection;
 use Illuminate\Support\Facades\Auth;
 
 class AdminPostsController extends Controller
 {
-    public function index()
-    {
-        $posts = Post::with('user', 'category')->orderBy('id', 'desc')->paginate(10);
-        $response = [
-            'pagination' => [
-                'total' => $posts->total(),
-                'per_page' => $posts->perPage(),
-                'current_page' => $posts->currentPage(),
-                'last_page' => $posts->lastPage(),
-                'from' => $posts->firstItem(),
-                'to' => $posts->lastItem()
-            ],
-            'data' => $posts
-        ];
-        return response()->json($response);
+    public function index(){     
+
+        //            <!--<td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->title}}</a></td>-->
+        $posts = Post::orderBy('id', 'DESC')->get();
+        return view('admin.posts.index', compact('posts'));
+
+    }
+
+    public function create(){
+        $categories = Category::pluck('name', 'id')->all();
+        return view('admin.posts.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
-        $exploded = explode(',', request('photo'));
-        $decoded = base64_decode($exploded[1]);
-        if(str_contains($exploded[0], 'jpeg'))
-            $extension = 'jpg';
-        else
-            $extension = 'png';   
 
-        $fileName = str_random().'.'.$extension;
-        $path = public_path().'/'.$fileName;
-        file_put_contents($path, $decoded);
-        $post = Post::create([
-            'title' => request('title'),
-            'description' => request('description'),
-            'user_id' => Auth::id(),
-            'category_id' => request('category_id'),
-            'photo' => $fileName
-        ]);
-
-        return response()->json([
-            'post' => $post,
-        ], 200);
+        $user = Auth::user();
+        if($file = $request->file('photo')){
+            $name = time() . $file->getClientOriginalName();
+        
+            Post::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'user_id' => Auth::id(),
+                'category_id' => $request->category_id,
+                'photo' => $name
+            ]);
+            $file->move('images', $name);
+        }
+        else{
+            Post::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'user_id' => Auth::id(),
+                'category_id' => $request->category_id
+            ]);
+        }
+        return redirect('/admin/posts');
     }
 
-    public function show($id)
-    {
-    
+    /***********   UPDATE FORM     ************/
+    /******************************************/
+    public function edit($id){
+        $post = Post::findOrFail($id);
+        $categories = Category::pluck('name','id')->all();
+        return view('admin.posts.edit', compact('post','categories'));
     }
 
-
+    /***********   UPDATE METHOD     ************/
+    /******************************************/
     public function update(Request $request, $id)
     {
-        $exploded = explode(',', request('photo'));
-        $decoded = base64_decode($exploded[1]);
-        if(str_contains($exploded[0], 'jpeg'))
-            $extension = 'jpg';
-        else
-            $extension = 'png';   
-
-        $fileName = str_random().'.'.$extension;
-        $path = public_path().'/'.$fileName;
-        file_put_contents($path, $decoded);
-
-        $post = Post::findOrFail($id);
-        $post->title = request('title');
-        $post->description = request('description');
-        $post->category_id = request('category_id');
-        $post->user_id = Auth::id();
-        $post->photo = $fileName;
-        $post->save();
-
-        return response()->json([
-            'post' => $post,
-        ], 200);
+        $user = Auth::user();
+        if($file = $request->file('photo')){
+            $name = time() . $file->getClientOriginalName();
+            $input1 = [
+                'title' => $request->title,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
+                'photo' => $name
+            ];
+            $file->move('images', $name);
+            Auth::user()->posts()->whereId($id)->first()->update($input1);
+        }
+        else{
+            $input2 = [
+                'title' => $request->title,
+                'description' => $request->description,
+                'category_id' => $request->category_id
+            ];
+            Auth::user()->posts()->whereId($id)->first()->update($input2);
+        }
+        return redirect('/admin/posts');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /***********   DELETE     ************/
+    /******************************************/
     public function destroy($id)
     {
         Post::findOrFail($id)->delete();
+
+        return redirect('/admin/posts');
     }
 
+    public function show(){
+        return view('admin.posts.show');
+    }
+
+
+    /***********   SINGLE POST API     ************/
+    /******************************************/
     public function single($slug){
         $post = Post::with('category', 'user')->where('slug', $slug)->first();
         return  response()->json([

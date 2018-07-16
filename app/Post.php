@@ -10,7 +10,7 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 class Post extends Model
 {
     protected $fillable = ['title', 'description', 'user_id', 'photo', 'category_id'];
-
+    protected $uploads = '/images/';
     use Sluggable;
     
     public function sluggable()
@@ -28,5 +28,9 @@ class Post extends Model
 
     public function category(){
     	return $this->belongsTo('App\Category');
+    }
+
+    public function getPhotoAttribute($photo){
+        return $this->uploads . $photo;
     }
 }
