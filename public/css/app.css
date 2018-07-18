@@ -10447,10 +10447,6 @@ nav.navbar.navbar-expand-sm {
   padding-left: 0;
 }
 
-.row {
-  margin: 0 !important;
-}
-
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -10656,5 +10652,13 @@ i.fab.fa-linkedin-in:before {
 
 .sidebar ul.unstyled.icons-list li {
   margin-right: 10px;
+}
+
+.btn-add {
+  margin-bottom: 5px;
+}
+
+.flex.create-box {
+  width: 160px;
 }
 

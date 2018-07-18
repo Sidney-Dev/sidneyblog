@@ -4,6 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--  
+        Add meta tttle
+        description
+        disable zooming
+    -->
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -31,7 +36,7 @@
                         <!--<li class="nav-item">
                             <li><router-link to="/subscriber"><a class="nav-link" >{{ Auth::user()->name }}</a></router-link></li>
                         </li>-->
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/logout') }}">Logout</a>
                         </li>

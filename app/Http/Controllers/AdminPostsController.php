@@ -64,7 +64,6 @@ class AdminPostsController extends Controller
     /******************************************/
     public function update(Request $request, $id)
     {
-        $user = Auth::user();
         if($file = $request->file('photo')){
             $name = time() . $file->getClientOriginalName();
             $input1 = [
@@ -83,6 +82,7 @@ class AdminPostsController extends Controller
                 'category_id' => $request->category_id
             ];
             Auth::user()->posts()->whereId($id)->first()->update($input2);
+            
         }
         return redirect('/admin/posts');
     }

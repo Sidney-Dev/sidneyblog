@@ -4,7 +4,7 @@
 	    <article id="posts" v-for="post in filteredPosts">
 		    <p>Posted By <strong>{{post.user.name}}</strong> {{ post.created_at | moment("from", "now", true) }} ago</p>
 		    <h2><router-link :to="{name:'post', params: {slug: post.slug}}">{{post.title}}</router-link></h2>
-		    <div>{{synopsis (post.description)}}</div>
+		    <div>{{synopsis (post.description)}}...</div>
 		    <router-link class="btn read-more" :to="{name:'post', params: {slug: post.slug}}">Read More</router-link>
 		</article>
 	    <pagination v-if="pagination.last_page > 1" :pagination="pagination" :offset="5" @paginate="allPosts()"></pagination>
@@ -22,6 +22,7 @@
           		}
        		}
        	},
+
        	mounted(){
        		this.allPosts();
        	},

@@ -29,9 +29,6 @@
                 <ul class="navbar-nav">
                     @if(Auth::check())
                         <li class="nav-item">
-                            <li><router-link to="/subscriber"><a class="nav-link" >{{ Auth::user()->name }}</a></router-link></li>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="{{ url('/logout') }}">Logout</a>
                         </li>
                     @else
@@ -80,3 +77,4 @@
     </div>
 </body>
 </html>
+

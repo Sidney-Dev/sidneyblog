@@ -16,14 +16,13 @@ Route::get('/', function () {
     return view('homepage');
 });
 
-
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
 Route::get('/home', 'HomeController@index')->name('home');
 
-/**************************
-		API'S
-**************************/
+/************************************************************
+							API'S
+************************************************************/
 Route::get('/api/homeposts', 'HomePostsController@posts')->name('homeposts');
 Route::resource('/api/users', 'AdminUsersController');
 Route::resource('/api/posts', 'AdminPostsController');
@@ -37,18 +36,12 @@ Route::resource('/api/subscriber', 'SubscriberController');
 })->where('vue_capture','[\/\w\.-]*');*/
 
 /************************************************************
-		  				ADMIN ROUTE
+		  				ADMIN ROUTES
 ************************************************************/
 Route::group(['middleware'=>'admin'], function(){
-	/*Route::get('/admin/{vue_capture?}', function () {
-	    return view('admin');
-	})->where('vue_capture','[\/\w\.-]*');*/
-	//Route::get('/admin/users', 'AdminUsersController@users')->name('allusers');;
 	Route::get('/admin/users', 'AdminUsersController@users')->name('allusers');
 	Route::resource('/admin/posts', 'AdminPostsController');
 });
-
-
 
 /************************************************************
 					SUBSCRIBER ROUTE
@@ -59,27 +52,6 @@ Route::group(['middleware'=>'subscriber'], function(){
 	})->where('vue_capture','[\/\w\.-]*');
 });
 
-
-/*Route::get('/post/{id}/{vue_capture?}', function () {
-    return view('homepage');
-})->where('vue_capture','[\/\w\.-]*');*/
-
 /**********************************************************/
 
 Route::get('/single/post/{slug}', 'AdminPostsController@single');
-
-
-//Route::patch('/api/posts', 'AdminPostsController@update');
-/*
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-     \UniSharp\LaravelFilemanager\Lfm::routes();
- });
-*/
-/*
-Route::get('/single/post/{slug}',function(){
- $post = App\Post::with('category', 'user')->where('slug', 'example')->first();
- return  response()->json([
-        'post' => $post
-    ], 200);
-});
-*/

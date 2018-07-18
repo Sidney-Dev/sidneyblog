@@ -55911,7 +55911,7 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _c("div", [_vm._v(_vm._s(_vm.synopsis(post.description)))]),
+            _c("div", [_vm._v(_vm._s(_vm.synopsis(post.description)) + "...")]),
             _vm._v(" "),
             _c(
               "router-link",

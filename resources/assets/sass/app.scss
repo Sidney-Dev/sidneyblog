@@ -37,9 +37,6 @@ header a.nav-link {
 nav.navbar.navbar-expand-sm {
     padding-left: 0;
 }
-.row{
-	margin: 0 !important;
-}
 
 .navbar-laravel {
   background-color: #fff;
@@ -221,4 +218,12 @@ i.fab.fa-linkedin-in:before {
 
 .sidebar ul.unstyled.icons-list li {
     margin-right: 10px;
+}
+
+.btn-add{
+    margin-bottom: 5px;
+}
+
+.flex.create-box {
+    width: 160px;
 }

@@ -4,6 +4,8 @@
 
 <h1>All Posts</h1>
 
+<a class="btn btn-primary btn-add" href="{{route('posts.create')}}">Create</a>
+
 <table class="table">
     <thead>
       <tr>
